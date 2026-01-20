@@ -5,34 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google - Data & Intelligence</title>
     <style>
-        /* Google 标志性的蓝色主题 */
         :root { --google-blue: #4285f4; --dark-bg: #0a0a0a; --card-bg: #161616; --text-white: #ffffff; }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
         body { background-color: var(--dark-bg); color: var(--text-white); padding-bottom: 50px; }
 
-        /* 顶部导航 */
         nav { padding: 20px; background: #000; display: flex; align-items: center; border-bottom: 2px solid var(--google-blue); }
         .back-btn { color: #aaa; text-decoration: none; font-size: 1rem; margin-right: 20px; transition: 0.3s; }
         .back-btn:hover { color: #fff; }
         .logo { color: var(--google-blue); font-size: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Hero 标题 */
         .hero { background: linear-gradient(to bottom, #0a1526, #0a0a0a); padding: 60px 20px; text-align: center; }
         .hero h1 { font-size: 3rem; margin-bottom: 15px; }
         .hero p { color: #bbb; max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
         
-        /* 内容布局 */
         .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
-        
-        /* 标题样式 */
         h2 { color: var(--google-blue); border-left: 4px solid var(--google-blue); padding-left: 15px; margin: 40px 0 20px; font-size: 1.8rem; }
 
-        /* 介绍文字 */
         .intro-text { font-size: 1.1rem; line-height: 1.8; color: #d1d5db; margin-bottom: 30px; }
         .intro-text strong { color: var(--text-white); }
 
-        /* 新闻卡片 */
         .loading { color: #888; text-align: center; padding: 20px; font-style: italic; }
         .news-item { background: var(--card-bg); padding: 25px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #333; transition: 0.3s; }
         .news-item:hover { border-color: var(--google-blue); transform: translateX(5px); }
@@ -58,22 +49,57 @@
         <h2>What They Do</h2>
         <div class="intro-text">
             <p>
-                Google (and its lab <strong>DeepMind</strong>) has been an AI pioneer for decades. They invented the "Transformer" technology that made ChatGPT possible. Their key focuses are:
+                Google (and its lab <strong>DeepMind</strong>) has been an AI pioneer for decades. Key focuses:
             </p>
             <ul style="margin-top: 15px; margin-left: 20px; color: #bbb;">
-                <li style="margin-bottom: 10px;"><strong>Gemini:</strong> Their most capable AI model, integrated into Google Search, Gmail, and Docs.</li>
-                <li style="margin-bottom: 10px;"><strong>AlphaFold:</strong> An AI that solved biology's biggest problem by predicting protein structures, accelerating drug discovery.</li>
-                <li style="margin-bottom: 10px;"><strong>Android AI:</strong> Embedding smart AI features directly into Pixel phones and Android devices.</li>
+                <li style="margin-bottom: 10px;"><strong>Gemini:</strong> Integrated into Google Search and Android.</li>
+                <li style="margin-bottom: 10px;"><strong>AlphaFold:</strong> Predicting protein structures for science.</li>
             </ul>
         </div>
 
         <h2>Latest Updates (Auto)</h2>
         <div id="news-container">
-            <div class="loading">Fetching Google DeepMind news...</div>
+            <div class="loading">Connecting to Google News...</div>
         </div>
 
     </div>
 
     <script>
-        // 自动抓取 Google, Gemini, DeepMind 相关新闻
-        const rssUrl = '
+        // 修复：我把搜索词简化成了 "Google AI"，这样加载速度会快很多
+        const rssUrl = 'https://news.google.com/rss/search?q=Google+DeepMind+AI&hl=en-US&gl=US&ceid=US:en';
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('news-container');
+                // 如果没有新闻，就显示错误提示
+                if (data.items.length === 0) {
+                    container.innerHTML = '<p style="color: #666; text-align: center;">No news found at the moment.</p>';
+                    return;
+                }
+
+                container.innerHTML = ''; 
+                const articles = data.items.slice(0, 5);
+
+                articles.forEach(article => {
+                    const card = document.createElement('div');
+                    card.className = 'news-item';
+                    const date = new Date(article.pubDate).toLocaleDateString();
+
+                    card.innerHTML = `
+                        <span class="news-date">${date}</span>
+                        <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
+                        <p>Click title to read more...</p>
+                    `;
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.log(error);
+                document.getElementById('news-container').innerHTML = '<p style="color:red; text-align:center;">Network Error: Could not load news.</p>';
+            });
+    </script>
+
+</body>
+</html>
