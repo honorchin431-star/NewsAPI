@@ -26,70 +26,67 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
 
-        .card { background: var(--card-bg); padding: 30px; border-radius: 15px; border: 1px solid #333; transition: 0.3s; position: relative; overflow: hidden; text-decoration: none; color: inherit; display: block; }
+        .card { background: var(--card-bg); padding: 30px; border-radius: 15px; border: 1px solid #333; transition: 0.3s; text-decoration: none; color: inherit; display: block; }
         .card:hover { transform: translateY(-5px); border-color: var(--neon-green); box-shadow: 0 0 20px rgba(0, 255, 157, 0.15); cursor: pointer; }
-        .card h3 { font-size: 1.8rem; margin-bottom: 10px; display: flex; align-items: center; }
-        .card span { font-size: 0.9rem; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display: block; }
-        .card p { color: var(--text-sub); font-size: 1rem; }
+        .card h3 { font-size: 1.8rem; margin-bottom: 10px; }
+        .card span { font-size: 0.9rem; color: var(--neon-blue); text-transform: uppercase; margin-bottom: 15px; display: block; }
+        .card p { color: var(--text-sub); }
 
+        .follow-section { background: #111; border: 1px dashed var(--neon-green); padding: 40px; border-radius: 20px; text-align: center; margin-top: 60px; }
+        .follow-input { padding: 12px 20px; width: 100%; max-width: 300px; border-radius: 25px; border: none; background: #222; color: white; margin-bottom: 15px; outline: none; }
+        .follow-btn { padding: 12px 30px; border-radius: 25px; border: none; background: var(--neon-green); color: black; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .follow-btn:hover { background: #fff; transform: scale(1.05); }
+
+        .floating-follow { position: fixed; bottom: 30px; right: 30px; background: var(--neon-green); color: black; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 0 20px rgba(0, 255, 157, 0.5); z-index: 1000; animation: pulse 2s infinite; }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">AI HUB</div>
-        <div style="color: var(--neon-green); font-size: 0.8rem; border: 1px solid var(--neon-green); padding: 2px 8px; border-radius: 4px;">FINAL VERSION 4.0</div>
-    </nav>
+    <nav><div class="logo">AI HUB</div></nav>
 
     <div class="hero">
         <h1>Welcome to the <span style="color: var(--neon-green);">AI Future</span></h1>
-        <p>The world's first student-led hub for real-time Artificial Intelligence news.</p>
+        <p>The world's first student-led hub for real-time AI news.</p>
     </div>
 
     <div class="container">
         <div class="grid">
-            
-            <a href="nvidia.html" class="card">
-                <h3>NVIDIA 🔗</h3>
-                <span>Hardware</span>
-                <p>The AI "Engine". Click for Blackwell B200 news.</p>
-            </a>
+            <a href="nvidia.html" class="card"><h3>NVIDIA 🔗</h3><span>Hardware</span><p>Live B200 and GPU updates.</p></a>
+            <a href="tesla.html" class="card"><h3>TESLA 🔗</h3><span>Robotics</span><p>Optimus and FSD progress.</p></a>
+            <a href="openai.html" class="card"><h3>OPENAI 🔗</h3><span>Gen AI</span><p>ChatGPT and Sora news.</p></a>
+            <a href="google.html" class="card"><h3>GOOGLE 🔗</h3><span>Research</span><p>Gemini and DeepMind discovery.</p></a>
+            <a href="microsoft.html" class="card"><h3>MICROSOFT 🔗</h3><span>Software</span><p>Copilot and Windows AI.</p></a>
+            <a href="meta.html" class="card"><h3>META 🔗</h3><span>Open Source</span><p>Llama and AI wearables.</p></a>
+        </div>
 
-            <a href="tesla.html" class="card">
-                <h3>TESLA 🔗</h3>
-                <span>Real World AI</span>
-                <p>Robots & FSD. Click for Optimus news.</p>
-            </a>
-
-            <a href="openai.html" class="card">
-                <h3>OPENAI 🔗</h3>
-                <span>Generative AI</span>
-                <p>ChatGPT & Sora. Click for GPT-5 updates.</p>
-            </a>
-
-            <a href="google.html" class="card">
-                <h3>GOOGLE 🔗</h3>
-                <span>DeepMind</span>
-                <p>Gemini & Research. Click for latest AI news.</p>
-            </a>
-
-            <a href="microsoft.html" class="card">
-                <h3>MICROSOFT 🔗</h3>
-                <span>Software</span>
-                <p>Copilot & Windows. Click for Microsoft news.</p>
-            </a>
-
-            <a href="meta.html" class="card">
-                <h3>META 🔗</h3>
-                <span>Open Source</span>
-                <p>Llama & AI Glasses. Click for Meta news.</p>
-            </a>
-
+        <div class="follow-section" id="subscribe">
+            <h2>Follow the Revolution</h2>
+            <p style="color: #888; margin-bottom: 20px;">Get a notification whenever the AI world changes.</p>
+            <input type="email" id="userEmail" class="follow-input" placeholder="Enter your email...">
+            <br>
+            <button class="follow-btn" onclick="subscribe()">FOLLOW NOW</button>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 40px; color: #555; border-top: 1px solid #222;">
+    <a href="#subscribe" class="floating-follow">Follow for Updates ⚡</a>
+
+    <script>
+        function subscribe() {
+            const email = document.getElementById('userEmail').value;
+            if (email.includes('@')) {
+                // 已自动填入你的 Google Form 链接
+                window.open('https://docs.google.com/forms/d/e/1FAIpQLSesnnAaRaIBZiK9WF3A8Iv5Tihzngo-rgncFDrGa3B8Uz_lyg/viewform?usp=pp_url&entry.1054366524=' + email);
+                alert("感谢关注！请在弹出的页面点击提交以完成订阅。");
+            } else {
+                alert("请输入正确的邮箱地址！");
+            }
+        }
+    </script>
+
+    <footer style="text-align: center; padding: 40px; color: #555;">
         <p>Created by Chin Wai Feng | AI Horizon Project 2026</p>
     </footer>
 </body>
