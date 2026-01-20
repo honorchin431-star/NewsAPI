@@ -3,219 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Horizon - The Future of Intelligence</title>
-    <meta name="description" content="Discover the latest in Artificial Intelligence. Tracking major players like Nvidia, Tesla, OpenAI, and Google.">
+    <title>AI Tech Hub - Global Intelligence</title>
     <style>
+        /* 核心样式设定 */
         :root {
-            --primary-color: #00ff88;
-            --secondary-color: #00b4d8;
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --text-light: #f8fafc;
-            --text-gray: #94a3b8;
+            --neon-green: #00ff9d;
+            --neon-blue: #00b8ff;
+            --dark-bg: #0a0a0a;
+            --card-bg: #161616;
+            --text-main: #ffffff;
+            --text-sub: #a0a0a0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        
+        body { 
+            background-color: var(--dark-bg); 
+            color: var(--text-main); 
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        
-        body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
-
-        /* Navigation */
+        /* 顶部导航 */
         nav {
-            padding: 1.5rem 5%;
+            padding: 20px 5%;
+            background: rgba(10, 10, 10, 0.9);
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(15, 23, 42, 0.95);
-            position: sticky;
-            top: 0;
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            border-bottom: 1px solid #334155;
         }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--neon-green); text-transform: uppercase; letter-spacing: 2px; }
 
-        .logo { font-size: 1.5rem; font-weight: bold; background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; color: transparent; }
-        .nav-links a { color: var(--text-light); text-decoration: none; margin-left: 2rem; transition: 0.3s; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-        .nav-links a:hover { color: var(--primary-color); }
-
-        /* Layout */
-        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
-        
-        h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 5px solid var(--primary-color); padding-left: 1rem; }
-
-        /* Hero Section */
+        /* Hero 标题区域 */
         .hero {
             text-align: center;
-            padding: 8rem 2rem;
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            padding: 80px 20px;
+            background: radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%);
+            animation: fadeIn 1.5s ease-in-out;
         }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1.5rem; }
-        .hero h1 span { color: var(--primary-color); }
-        .hero p { font-size: 1.25rem; color: var(--text-gray); max-width: 700px; margin: 0 auto; }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+        .hero p { color: var(--text-sub); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
 
-        /* News Grid */
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        
+        /* 公司展示区 (Grid 布局) */
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .section-title { font-size: 2rem; margin-bottom: 30px; border-left: 5px solid var(--neon-blue); padding-left: 15px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        /* 卡片设计 */
         .card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #334155;
-        }
-        .card:hover { transform: translateY(-5px); border-color: var(--primary-color); box-shadow: 0 10px 20px rgba(0, 255, 136, 0.1); }
-        
-        .card-content { padding: 1.5rem; }
-        .tag { background: rgba(0, 255, 136, 0.1); color: var(--primary-color); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
-        .date { font-size: 0.8rem; color: var(--text-gray); float: right; }
-        .card h3 { margin: 1rem 0; font-size: 1.4rem; line-height: 1.3; }
-        .card p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 1.5rem; }
-        .btn { color: var(--secondary-color); text-decoration: none; font-weight: bold; font-size: 0.9rem; }
-        .btn:hover { text-decoration: underline; }
-
-        /* Company Grid */
-        .company-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
-
-        .company-card {
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid #334155;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            transition: 0.3s;
             position: relative;
             overflow: hidden;
         }
-        .company-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--border-color, #334155);
-        }
+        .card:hover { transform: translateY(-5px); border-color: var(--neon-green); box-shadow: 0 0 15px rgba(0, 255, 157, 0.2); }
         
-        .company-header { display: flex; align-items: center; margin-bottom: 1.5rem; }
-        .company-icon { 
-            width: 50px; height: 50px; 
-            background: var(--text-light); 
-            border-radius: 12px; 
-            display: flex; align-items: center; justify-content: center; 
-            color: #000; font-weight: 900; font-size: 1.5rem; margin-right: 1rem; 
-        }
-        
-        .role-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-gray); display: block; margin-bottom: 0.5rem; }
-        .highlight { color: var(--primary-color); font-weight: bold; }
+        .card h3 { font-size: 1.8rem; margin-bottom: 10px; display: flex; align-items: center; }
+        .card span { font-size: 0.9rem; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display: block; }
+        .card p { color: var(--text-sub); font-size: 1rem; }
 
-        footer { text-align: center; padding: 3rem 1rem; color: var(--text-gray); border-top: 1px solid #334155; margin-top: 5rem; }
+        /* 底部 */
+        footer { text-align: center; padding: 40px; color: #555; font-size: 0.9rem; border-top: 1px solid #222; margin-top: 50px; }
+
+        /* 简单的淡入动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">AI Horizon</div>
-        <div class="nav-links">
-            <a href="#news">News</a>
-            <a href="#companies">Key Players</a>
-            <a href="#about">About</a>
-        </div>
+        <div class="logo">AI HUB</div>
+        <div style="color: #666; font-size: 0.9rem;">v2.0 LIVE</div>
     </nav>
 
-    <section class="hero">
-        <h1>Tracking the <span>AI Revolution</span></h1>
-        <p>Your central hub for the latest updates from industry giants like Nvidia, Tesla, OpenAI, and more. Understanding the technology that shapes our future.</p>
-    </section>
+    <div class="hero">
+        <h1>Welcome to the <span style="color: var(--neon-green);">AI Future</span></h1>
+        <p>Your ultimate guide to the Artificial Intelligence revolution. Tracking the giants shaping our world.</p>
+    </div>
 
-    <section id="news" class="container">
-        <h2>Latest Headlines</h2>
-        <div class="news-grid">
-            <article class="card">
-                <div class="card-content">
-                    <span class="tag">Nvidia</span> <span class="date">Jan 20, 2026</span>
-                    <h3>New Blackwell Chips Revealed</h3>
-                    <p>Nvidia's latest GPU architecture promises to speed up AI training by 500%, setting a new standard for data centers worldwide.</p>
-                    <a href="#" class="btn">Read More →</a>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-content">
-                    <span class="tag">OpenAI</span> <span class="date">Jan 18, 2026</span>
-                    <h3>GPT-5 Rumors Intensify</h3>
-                    <p>Insiders suggest the next generation of ChatGPT will feature near-human reasoning capabilities and real-time video understanding.</p>
-                    <a href="#" class="btn">Read More →</a>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-content">
-                    <span class="tag">Tesla</span> <span class="date">Jan 15, 2026</span>
-                    <h3>Optimus Bot Joins the Factory</h3>
-                    <p>Tesla's humanoid robots are now performing autonomous tasks on the assembly line, marking a huge milestone in general-purpose robotics.</p>
-                    <a href="#" class="btn">Read More →</a>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <section id="companies" class="container">
-        <h2>The Big Players</h2>
-        <p style="color: #94a3b8; margin-bottom: 2rem;">These are the 6 companies currently defining the Artificial Intelligence landscape.</p>
-        
-        <div class="company-grid">
+    <div class="container">
+        <h2 class="section-title">The Big 6 Leaders</h2>
+        <div class="grid">
             
-            <div class="company-card" style="--border-color: #76b900;">
-                <div class="company-header">
-                    <div class="company-icon">N</div>
-                    <h3>Nvidia</h3>
-                </div>
-                <span class="role-label">The Engine</span>
-                <p>Nvidia builds the <strong>GPUs (Chips)</strong> that power almost every AI system on Earth. Without them, modern AI simply wouldn't exist.</p>
+            <div class="card">
+                <h3>NVIDIA</h3>
+                <span>Hardware & Computing</span>
+                <p>The absolute king of AI hardware. Their H100 and Blackwell GPUs power nearly every major AI model in existence, including ChatGPT.</p>
             </div>
 
-            <div class="company-card" style="--border-color: #e82127;">
-                <div class="company-header">
-                    <div class="company-icon">T</div>
-                    <h3>Tesla</h3>
-                </div>
-                <span class="role-label">Real World AI</span>
-                <p>Tesla focuses on applying AI to the physical world through <strong>Self-Driving Cars (FSD)</strong> and <strong>Humanoid Robots (Optimus)</strong>.</p>
+            <div class="card">
+                <h3>TESLA</h3>
+                <span>Robotics & Autonomy</span>
+                <p>Moving AI into the physical world. Tesla uses massive neural networks for Full Self-Driving (FSD) cars and the Optimus humanoid robot.</p>
             </div>
 
-            <div class="company-card" style="--border-color: #10a37f;">
-                <div class="company-header">
-                    <div class="company-icon">O</div>
-                    <h3>OpenAI</h3>
-                </div>
-                <span class="role-label">The Pioneer</span>
-                <p>Creators of <strong>ChatGPT</strong> and <strong>Sora</strong>. They kicked off the current AI boom and lead the world in Large Language Model (LLM) research.</p>
+            <div class="card">
+                <h3>OPENAI</h3>
+                <span>Generative AI</span>
+                <p>The creators of ChatGPT and Sora. They are leading the race towards AGI (Artificial General Intelligence) with powerful reasoning models.</p>
             </div>
 
-            <div class="company-card" style="--border-color: #4285f4;">
-                <div class="company-header">
-                    <div class="company-icon">G</div>
-                    <h3>Google / DeepMind</h3>
-                </div>
-                <span class="role-label">The Researcher</span>
-                <p>With their <strong>Gemini</strong> models, Google is integrating powerful AI into Search, Android, and Workspace to make information universally accessible.</p>
+            <div class="card">
+                <h3>GOOGLE</h3>
+                <span>Data & Research</span>
+                <p>With DeepMind and the Gemini models, Google is integrating AI into search, phones, and scientific discovery.</p>
             </div>
 
-            <div class="company-card" style="--border-color: #00a4ef;">
-                <div class="company-header">
-                    <div class="company-icon">M</div>
-                    <h3>Microsoft</h3>
-                </div>
-                <span class="role-label">The Integrator</span>
-                <p>Through <strong>Copilot</strong>, Microsoft puts AI into every PC and Office app. They are also the biggest investor in OpenAI.</p>
+            <div class="card">
+                <h3>MICROSOFT</h3>
+                <span>Software Integration</span>
+                <p>Through Copilot, Microsoft is embedding AI into every PC and office software, making AI a daily productivity tool.</p>
             </div>
 
-            <div class="company-card" style="--border-color: #0668e1;">
-                <div class="company-header">
-                    <div class="company-icon">∞</div>
-                    <h3>Meta (Facebook)</h3>
-                </div>
-                <span class="role-label">Open Source Leader</span>
-                <p>Unlike others, Meta releases their powerful <strong>Llama</strong> AI models for free, allowing developers everywhere to build their own AI tools.</p>
+            <div class="card">
+                <h3>META</h3>
+                <span>Open Source</span>
+                <p>Meta is democratizing AI by releasing their Llama models for free, allowing developers everywhere to build their own AI applications.</p>
             </div>
 
         </div>
-    </section>
+    </div>
 
     <footer>
-        <p id="about">© 2026 AI Horizon. Built to educate and inspire.</p>
+        <p>Created by Chin Wai Feng | 2026 AI Project</p>
     </footer>
+
+    <script>
+        window.onload = function() {
+            console.log("Website Loaded Successfully!");
+            // 如果你想看到弹窗，可以把下面这行前面的 // 去掉
+            // alert("Welcome! Your AI site is working perfectly.");
+        }
+    </script>
 
 </body>
 </html>
