@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft - AI for Productivity</title>
+    <style>
+        /* Microsoft 天蓝色主题 */
+        :root { --ms-blue: #00a4ef; --dark-bg: #0a0a0a; --card-bg: #161616; --text-white: #ffffff; }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { background-color: var(--dark-bg); color: var(--text-white); padding-bottom: 50px; }
+
+        /* 导航栏 */
+        nav { padding: 20px; background: #000; display: flex; align-items: center; border-bottom: 2px solid var(--ms-blue); }
+        .back-btn { color: #aaa; text-decoration: none; font-size: 1rem; margin-right: 20px; transition: 0.3s; }
+        .back-btn:hover { color: #fff; }
+        .logo { color: var(--ms-blue); font-size: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Hero 区域 */
+        .hero { background: linear-gradient(to bottom, #001f33, #0a0a0a); padding: 60px 20px; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; }
+        .hero p { color: #bbb; max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        h2 { color: var(--ms-blue); border-left: 4px solid var(--ms-blue); padding-left: 15px; margin: 40px 0 20px; font-size: 1.8rem; }
+
+        .intro-text { font-size: 1.1rem; line-height: 1.8; color: #d1d5db; margin-bottom: 30px; }
+        
+        /* 自动新闻样式 */
+        .loading { color: #888; text-align: center; padding: 20px; font-style: italic; }
+        .news-item { background: var(--card-bg); padding: 25px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #333; transition: 0.3s; }
+        .news-item:hover { border-color: var(--ms-blue); transform: translateX(5px); }
+        .news-date { color: var(--ms-blue); font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        .news-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .news-item a { text-decoration: none; color: white; }
+        .news-item p { color: #aaa; line-height: 1.5; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="back-btn">← Back to Hub</a>
+        <div class="logo">Microsoft AI</div>
+    </nav>
+
+    <div class="hero">
+        <h1>AI on Every Desk</h1>
+        <p>Integrating Artificial Intelligence into Windows, Office, and everything we do.</p>
+    </div>
+
+    <div class="container">
+        <h2>What They Do</h2>
+        <div class="intro-text">
+            <p>
+                Microsoft is the world's biggest software company and the main investor in OpenAI (they own 49% of it). Their strategy is to put an AI assistant named <strong>Copilot</strong> into every computer.
+            </p>
+            <ul style="margin-top: 15px; margin-left: 20px; color: #bbb;">
+                <li style="margin-bottom: 10px;"><strong>Copilot:</strong> An AI assistant built into Windows 11, Word, Excel, and PowerPoint to help you work faster.</li>
+                <li style="margin-bottom: 10px;"><strong>Azure AI:</strong> The massive cloud supercomputers that power ChatGPT and other AI models.</li>
+            </ul>
+        </div>
+
+        <h2>Latest Updates (Auto)</h2>
+        <div id="news-container">
+            <div class="loading">Fetching Microsoft Copilot news...</div>
+        </div>
+
+    </div>
+
+    <script>
+        // 自动抓取 Microsoft Copilot 相关新闻
+        const rssUrl = 'https://news.google.com/rss/search?q=Microsoft+Copilot+AI+Satya+Nadella&hl=en-US&gl=US&ceid=US:en';
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('news-container');
+                if (data.items.length === 0) {
+                    container.innerHTML = '<p style="color: #666; text-align: center;">No news found.</p>';
+                    return;
+                }
+                container.innerHTML = ''; 
+                const articles = data.items.slice(0, 5);
+
+                articles.forEach(article => {
+                    const card = document.createElement('div');
+                    card.className = 'news-item';
+                    const date = new Date(article.pubDate).toLocaleDateString();
+
+                    card.innerHTML = `
+                        <span class="news-date">${date}</span>
+                        <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
+                        <p>Click title to read more...</p>
+                    `;
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.log(error);
+                document.getElementById('news-container').innerHTML = '<p style="color:red; text-align:center;">Error loading news.</p>';
+            });
+    </script>
+
+</body>
+</html>
