@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVIDIA - The AI Engine</title>
+    <style>
+        :root { --nvidia-green: #76b900; --dark-bg: #0a0a0a; --card-bg: #161616; --text-white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { background-color: var(--dark-bg); color: var(--text-white); padding-bottom: 50px; }
+
+        /* 顶部导航 */
+        nav { padding: 20px; background: #000; display: flex; align-items: center; border-bottom: 2px solid var(--nvidia-green); }
+        .back-btn { color: #aaa; text-decoration: none; font-size: 1rem; margin-right: 20px; transition: 0.3s; }
+        .back-btn:hover { color: #fff; }
+        .logo { color: var(--nvidia-green); font-size: 1.5rem; font-weight: bold; text-transform: uppercase; }
+
+        /* Hero 区域 */
+        .hero { background: linear-gradient(to bottom, #1a1a1a, #0a0a0a); padding: 60px 20px; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; }
+        .hero p { color: #ccc; max-width: 700px; margin: 0 auto; font-size: 1.2rem; }
+        
+        /* 内容容器 */
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        
+        /* 标题样式 */
+        h2 { color: var(--nvidia-green); border-left: 4px solid var(--nvidia-green); padding-left: 15px; margin: 40px 0 20px; font-size: 1.8rem; }
+
+        /* 新闻卡片 */
+        .news-item { background: var(--card-bg); padding: 25px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #333; }
+        .news-date { color: #666; font-size: 0.9rem; margin-bottom: 5px; display: block; }
+        .news-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .news-item p { color: #aaa; line-height: 1.5; }
+
+        /* 视频/发布会区域 */
+        .event-box { background: #111; padding: 20px; border-radius: 10px; border: 1px solid var(--nvidia-green); text-align: center; }
+        .btn { display: inline-block; background: var(--nvidia-green); color: #000; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 15px; }
+        .btn:hover { background: #fff; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="back-btn">← Back to Hub</a>
+        <div class="logo">NVIDIA AI</div>
+    </nav>
+
+    <div class="hero">
+        <h1>Powering the Intelligence Era</h1>
+        <p>Nvidia is not just a chip company anymore. It is the backbone of the entire Artificial Intelligence revolution.</p>
+    </div>
+
+    <div class="container">
+        <h2>What They Do</h2>
+        <p style="color: #ccc; line-height: 1.8; font-size: 1.1rem;">
+            NVIDIA designs the most powerful <strong>GPUs (Graphics Processing Units)</strong> in the world. Originally made for video games, these chips turned out to be perfect for training AI. 
+            <br><br>
+            Their "CUDA" software allows developers to talk to these chips easily. Today, companies like OpenAI, Google, and Tesla all rely on NVIDIA's H100 and Blackwell chips to train their massive AI models.
+        </p>
+
+        <h2>Latest News</h2>
+        
+        <div class="news-item">
+            <span class="news-date">January 2026</span>
+            <h3>Blackwell B200 Chips Start Shipping</h3>
+            <p>Nvidia has officially begun shipping its new B200 AI chips to data centers. These chips are 30x faster at some tasks than the previous H100 generation.</p>
+        </div>
+
+        <div class="news-item">
+            <span class="news-date">December 2025</span>
+            <h3>Project GR00T for Humanoid Robots</h3>
+            <p>Nvidia announced a major update to Project GR00T, a foundational model for humanoid robots, helping robots learn movements directly from human videos.</p>
+        </div>
+
+        <h2>Key Events & Keynotes</h2>
+        <div class="event-box">
+            <h3>NVIDIA GTC 2026</h3>
+            <p style="color: #aaa; margin: 10px 0;">The #1 AI Conference for Developers</p>
+            <p>Jensen Huang revealed the future of sovereign AI and digital twins.</p>
+            <a href="https://www.nvidia.com/en-us/gtc/" target="_blank" class="btn">Watch Keynote Replay</a>
+        </div>
+    </div>
+
+</body>
+</html>
