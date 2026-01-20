@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta - Open Source AI</title>
+    <style>
+        /* Meta 品牌蓝 */
+        :root { --meta-blue: #0668e1; --dark-bg: #0a0a0a; --card-bg: #161616; --text-white: #ffffff; }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { background-color: var(--dark-bg); color: var(--text-white); padding-bottom: 50px; }
+
+        nav { padding: 20px; background: #000; display: flex; align-items: center; border-bottom: 2px solid var(--meta-blue); }
+        .back-btn { color: #aaa; text-decoration: none; font-size: 1rem; margin-right: 20px; transition: 0.3s; }
+        .back-btn:hover { color: #fff; }
+        .logo { color: var(--meta-blue); font-size: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+        .hero { background: linear-gradient(to bottom, #031c3d, #0a0a0a); padding: 60px 20px; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; }
+        .hero p { color: #bbb; max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        h2 { color: var(--meta-blue); border-left: 4px solid var(--meta-blue); padding-left: 15px; margin: 40px 0 20px; font-size: 1.8rem; }
+
+        .intro-text { font-size: 1.1rem; line-height: 1.8; color: #d1d5db; margin-bottom: 30px; }
+
+        .loading { color: #888; text-align: center; padding: 20px; font-style: italic; }
+        .news-item { background: var(--card-bg); padding: 25px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #333; transition: 0.3s; }
+        .news-item:hover { border-color: var(--meta-blue); transform: translateX(5px); }
+        .news-date { color: var(--meta-blue); font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        .news-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .news-item a { text-decoration: none; color: white; }
+        .news-item p { color: #aaa; line-height: 1.5; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="back-btn">← Back to Hub</a>
+        <div class="logo">Meta AI</div>
+    </nav>
+
+    <div class="hero">
+        <h1>AI for Everyone</h1>
+        <p>Leading the world in Open Source AI models and wearable intelligence.</p>
+    </div>
+
+    <div class="container">
+        <h2>What They Do</h2>
+        <div class="intro-text">
+            <p>
+                Meta (formerly Facebook) believes that AI should be <strong>Open Source</strong>. Instead of keeping their technology secret, they share it so everyone can build with it.
+            </p>
+            <ul style="margin-top: 15px; margin-left: 20px; color: #bbb;">
+                <li style="margin-bottom: 10px;"><strong>Llama:</strong> The most popular open-source Large Language Model that powers thousands of apps worldwide.</li>
+                <li style="margin-bottom: 10px;"><strong>AI Wearables:</strong> Their Ray-Ban Meta glasses allow you to talk to an AI that can "see" what you see through built-in cameras.</li>
+            </ul>
+        </div>
+
+        <h2>Latest Updates (Auto)</h2>
+        <div id="news-container">
+            <div class="loading">Connecting to Meta news feed...</div>
+        </div>
+
+    </div>
+
+    <script>
+        const rssUrl = 'https://news.google.com/rss/search?q=Meta+Llama+AI+Mark+Zuckerberg&hl=en-US&gl=US&ceid=US:en';
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('news-container');
+                container.innerHTML = ''; 
+                data.items.slice(0, 5).forEach(article => {
+                    const card = document.createElement('div');
+                    card.className = 'news-item';
+                    const date = new Date(article.pubDate).toLocaleDateString();
+                    card.innerHTML = `<span class="news-date">${date}</span><h3><a href="${article.link}" target="_blank">${article.title}</a></h3><p>Click title to read more...</p>`;
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => {
+                document.getElementById('news-container').innerHTML = '<p style="color:red; text-align:center;">Error loading news.</p>';
+            });
+    </script>
+
+</body>
+</html>
