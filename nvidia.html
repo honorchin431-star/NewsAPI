@@ -9,33 +9,27 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
         body { background-color: var(--dark-bg); color: var(--text-white); padding-bottom: 50px; }
 
-        /* 顶部导航 */
         nav { padding: 20px; background: #000; display: flex; align-items: center; border-bottom: 2px solid var(--nvidia-green); }
         .back-btn { color: #aaa; text-decoration: none; font-size: 1rem; margin-right: 20px; transition: 0.3s; }
         .back-btn:hover { color: #fff; }
         .logo { color: var(--nvidia-green); font-size: 1.5rem; font-weight: bold; text-transform: uppercase; }
 
-        /* Hero 区域 */
         .hero { background: linear-gradient(to bottom, #1a1a1a, #0a0a0a); padding: 60px 20px; text-align: center; }
         .hero h1 { font-size: 3rem; margin-bottom: 15px; }
-        .hero p { color: #ccc; max-width: 700px; margin: 0 auto; font-size: 1.2rem; }
         
-        /* 内容容器 */
         .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
-        
-        /* 标题样式 */
         h2 { color: var(--nvidia-green); border-left: 4px solid var(--nvidia-green); padding-left: 15px; margin: 40px 0 20px; font-size: 1.8rem; }
 
-        /* 新闻卡片 */
-        .news-item { background: var(--card-bg); padding: 25px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #333; }
-        .news-date { color: #666; font-size: 0.9rem; margin-bottom: 5px; display: block; }
-        .news-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
-        .news-item p { color: #aaa; line-height: 1.5; }
+        /* 新闻加载时的样式 */
+        .loading { color: #888; text-align: center; padding: 20px; font-style: italic; }
 
-        /* 视频/发布会区域 */
-        .event-box { background: #111; padding: 20px; border-radius: 10px; border: 1px solid var(--nvidia-green); text-align: center; }
-        .btn { display: inline-block; background: var(--nvidia-green); color: #000; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 15px; }
-        .btn:hover { background: #fff; }
+        /* 自动抓取的新闻样式 */
+        .news-item { background: var(--card-bg); padding: 25px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #333; transition: 0.3s; }
+        .news-item:hover { border-color: var(--nvidia-green); transform: translateX(5px); }
+        .news-date { color: var(--nvidia-green); font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        .news-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .news-item a { text-decoration: none; color: white; }
+        .news-item p { color: #aaa; line-height: 1.5; font-size: 0.95rem; }
     </style>
 </head>
 <body>
@@ -46,40 +40,64 @@
     </nav>
 
     <div class="hero">
-        <h1>Powering the Intelligence Era</h1>
-        <p>Nvidia is not just a chip company anymore. It is the backbone of the entire Artificial Intelligence revolution.</p>
+        <h1>NVIDIA Live Updates</h1>
+        <p>Real-time news fetched directly from Google News.</p>
     </div>
 
     <div class="container">
         <h2>What They Do</h2>
         <p style="color: #ccc; line-height: 1.8; font-size: 1.1rem;">
-            NVIDIA designs the most powerful <strong>GPUs (Graphics Processing Units)</strong> in the world. Originally made for video games, these chips turned out to be perfect for training AI. 
-            <br><br>
-            Their "CUDA" software allows developers to talk to these chips easily. Today, companies like OpenAI, Google, and Tesla all rely on NVIDIA's H100 and Blackwell chips to train their massive AI models.
+            NVIDIA designs the most powerful GPUs in the world. Their chips are the "brains" behind modern AI.
         </p>
 
-        <h2>Latest News</h2>
-        
-        <div class="news-item">
-            <span class="news-date">January 2026</span>
-            <h3>Blackwell B200 Chips Start Shipping</h3>
-            <p>Nvidia has officially begun shipping its new B200 AI chips to data centers. These chips are 30x faster at some tasks than the previous H100 generation.</p>
+        <h2>Latest News (Auto-Update)</h2>
+        <div id="news-container">
+            <div class="loading">Connecting to global news network...</div>
         </div>
 
-        <div class="news-item">
-            <span class="news-date">December 2025</span>
-            <h3>Project GR00T for Humanoid Robots</h3>
-            <p>Nvidia announced a major update to Project GR00T, a foundational model for humanoid robots, helping robots learn movements directly from human videos.</p>
-        </div>
-
-        <h2>Key Events & Keynotes</h2>
-        <div class="event-box">
-            <h3>NVIDIA GTC 2026</h3>
-            <p style="color: #aaa; margin: 10px 0;">The #1 AI Conference for Developers</p>
-            <p>Jensen Huang revealed the future of sovereign AI and digital twins.</p>
-            <a href="https://www.nvidia.com/en-us/gtc/" target="_blank" class="btn">Watch Keynote Replay</a>
-        </div>
     </div>
+
+    <script>
+        // 1. 设置我们要搜的关键词：Nvidia AI
+        // 这是一个 Google News 的 RSS 链接，我们通过 rss2json 把它可以变成网页能读懂的格式
+        const rssUrl = 'https://news.google.com/rss/search?q=Nvidia+AI+technology&hl=en-US&gl=US&ceid=US:en';
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+        // 2. 开始抓取数据
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('news-container');
+                container.innerHTML = ''; // 清空"Loading..."文字
+
+                // 3. 只显示前 5 条新闻 (你可以改这个数字)
+                const articles = data.items.slice(0, 5);
+
+                // 4. 把每一条新闻做成 HTML 卡片
+                articles.forEach(article => {
+                    // 创建卡片
+                    const card = document.createElement('div');
+                    card.className = 'news-item';
+
+                    // 处理时间 (只取日期部分)
+                    const date = new Date(article.pubDate).toLocaleDateString();
+
+                    // 填入内容
+                    card.innerHTML = `
+                        <span class="news-date">${date}</span>
+                        <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
+                        <p>Click the title to read the full source...</p>
+                    `;
+
+                    // 把卡片放到页面上
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.log(error);
+                document.getElementById('news-container').innerHTML = '<p style="color:red">Error loading news. Please try again later.</p>';
+            });
+    </script>
 
 </body>
 </html>
