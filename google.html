@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google - Data & Intelligence</title>
+    <style>
+        /* Google 标志性的蓝色主题 */
+        :root { --google-blue: #4285f4; --dark-bg: #0a0a0a; --card-bg: #161616; --text-white: #ffffff; }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { background-color: var(--dark-bg); color: var(--text-white); padding-bottom: 50px; }
+
+        /* 顶部导航 */
+        nav { padding: 20px; background: #000; display: flex; align-items: center; border-bottom: 2px solid var(--google-blue); }
+        .back-btn { color: #aaa; text-decoration: none; font-size: 1rem; margin-right: 20px; transition: 0.3s; }
+        .back-btn:hover { color: #fff; }
+        .logo { color: var(--google-blue); font-size: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Hero 标题 */
+        .hero { background: linear-gradient(to bottom, #0a1526, #0a0a0a); padding: 60px 20px; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; }
+        .hero p { color: #bbb; max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
+        
+        /* 内容布局 */
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        
+        /* 标题样式 */
+        h2 { color: var(--google-blue); border-left: 4px solid var(--google-blue); padding-left: 15px; margin: 40px 0 20px; font-size: 1.8rem; }
+
+        /* 介绍文字 */
+        .intro-text { font-size: 1.1rem; line-height: 1.8; color: #d1d5db; margin-bottom: 30px; }
+        .intro-text strong { color: var(--text-white); }
+
+        /* 新闻卡片 */
+        .loading { color: #888; text-align: center; padding: 20px; font-style: italic; }
+        .news-item { background: var(--card-bg); padding: 25px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #333; transition: 0.3s; }
+        .news-item:hover { border-color: var(--google-blue); transform: translateX(5px); }
+        .news-date { color: var(--google-blue); font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        .news-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .news-item a { text-decoration: none; color: white; }
+        .news-item p { color: #aaa; line-height: 1.5; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="back-btn">← Back to Hub</a>
+        <div class="logo">Google DeepMind</div>
+    </nav>
+
+    <div class="hero">
+        <h1>Organizing Information</h1>
+        <p>Bringing the power of AI to Search, Android, and scientific discovery.</p>
+    </div>
+
+    <div class="container">
+        <h2>What They Do</h2>
+        <div class="intro-text">
+            <p>
+                Google (and its lab <strong>DeepMind</strong>) has been an AI pioneer for decades. They invented the "Transformer" technology that made ChatGPT possible. Their key focuses are:
+            </p>
+            <ul style="margin-top: 15px; margin-left: 20px; color: #bbb;">
+                <li style="margin-bottom: 10px;"><strong>Gemini:</strong> Their most capable AI model, integrated into Google Search, Gmail, and Docs.</li>
+                <li style="margin-bottom: 10px;"><strong>AlphaFold:</strong> An AI that solved biology's biggest problem by predicting protein structures, accelerating drug discovery.</li>
+                <li style="margin-bottom: 10px;"><strong>Android AI:</strong> Embedding smart AI features directly into Pixel phones and Android devices.</li>
+            </ul>
+        </div>
+
+        <h2>Latest Updates (Auto)</h2>
+        <div id="news-container">
+            <div class="loading">Fetching Google DeepMind news...</div>
+        </div>
+
+    </div>
+
+    <script>
+        // 自动抓取 Google, Gemini, DeepMind 相关新闻
+        const rssUrl = '
