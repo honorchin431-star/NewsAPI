@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Horizon - 探索人工智能前沿</title>
+    <style>
+        :root {
+            --primary-color: #00ff88;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-light: #e2e8f0;
+            --text-gray: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        
+        body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+
+        /* 导航栏 */
+        nav {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.9);
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid #334155;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); }
+        .nav-links a { color: var(--text-light); text-decoration: none; margin-left: 2rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary-color); }
+
+        /* 通用容器 */
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        
+        h2 { font-size: 2rem; margin-bottom: 2rem; border-left: 5px solid var(--primary-color); padding-left: 1rem; }
+
+        /* Hero 区域 */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; background: linear-gradient(to right, #00ff88, #00b4d8); -webkit-background-clip: text; color: transparent; }
+        .hero p { font-size: 1.2rem; color: var(--text-gray); max-width: 600px; margin: 0 auto; }
+
+        /* 新闻板块 Grid */
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid #334155;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary-color); }
+        
+        .card-content { padding: 1.5rem; }
+        .tag { background: #00ff8820; color: var(--primary-color); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
+        .date { font-size: 0.8rem; color: var(--text-gray); margin-left: 10px; }
+        .card h3 { margin: 1rem 0; font-size: 1.25rem; }
+        .card p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 1rem; }
+        .btn { display: inline-block; color: var(--primary-color); text-decoration: none; font-weight: bold; }
+
+        /* 公司板块 */
+        .company-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        @media (max-width: 768px) { .company-grid { grid-template-columns: 1fr; } }
+
+        .company-card {
+            background: linear-gradient(145deg, var(--bg-card), #172033);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #334155;
+        }
+        .company-header { display: flex; align-items: center; margin-bottom: 1rem; }
+        .company-icon { width: 50px; height: 50px; background: var(--text-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: bold; margin-right: 1rem; }
+        
+        footer { text-align: center; padding: 2rem; color: var(--text-gray); border-top: 1px solid #334155; margin-top: 4rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">AI Horizon</div>
+        <div class="nav-links">
+            <a href="#news">AI 新闻</a>
+            <a href="#companies">核心公司</a>
+            <a href="#about">关于 AI</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>让未来触手可及</h1>
+        <p>汇聚全球最新人工智能资讯，深度解析 Nvidia、Tesla 等科技巨头的 AI 布局，帮助每一个人读懂人工智能时代。</p>
+    </section>
+
+    <section id="news" class="container">
+        <h2>最新 AI 动态</h2>
+        <div class="news-grid">
+            <article class="card">
+                <div class="card-content">
+                    <span class="tag">Nvidia</span> <span class="date">2026-01-20</span>
+                    <h3>英伟达发布新一代 AI 芯片</h3>
+                    <p>黄仁勋在最新的发布会上展示了下一代 Blackwell 架构 GPU，算力提升数倍，将进一步加速大模型的训练速度。</p>
+                    <a href="#" class="btn">阅读更多 →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-content">
+                    <span class="tag">Tesla</span> <span class="date">2026-01-18</span>
+                    <h3>Optimus 机器人进驻工厂</h3>
+                    <p>特斯拉宣布其人形机器人 Optimus 已经开始在超级工厂执行精密组装任务，展示了惊人的灵活性和自主决策能力。</p>
+                    <a href="#" class="btn">阅读更多 →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-content">
+                    <span class="tag">Generative AI</span> <span class="date">2026-01-15</span>
+                    <h3>AI 视频生成技术爆发</h3>
+                    <p>新的 Sora 模型更新让视频生成更加逼真，物理引擎模拟效果达到电影级水准，彻底改变内容创作行业。</p>
+                    <a href="#" class="btn">阅读更多 →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="companies" class="container">
+        <h2>AI 领航者：他们在做什么？</h2>
+        <div class="company-grid">
+            
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">N</div>
+                    <h3>Nvidia (英伟达)</h3>
+                </div>
+                <p style="margin-bottom: 1rem;"><strong>核心角色：</strong>AI 的"军火商" (算力提供者)</p>
+                <p>英伟达原本是做游戏显卡的公司，但现在他们制造的 <strong>GPU (图形处理器)</strong> 是全球 AI 的心脏。几乎所有的 AI 模型（如 ChatGPT）都需要数万张英伟达显卡来进行"训练"。</p>
+                <br>
+                <p style="color: var(--primary-color);">简单来说：如果没有英伟达的芯片，现代 AI 就无法思考。</p>
+            </div>
+
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">T</div>
+                    <h3>Tesla (特斯拉)</h3>
+                </div>
+                <p style="margin-bottom: 1rem;"><strong>核心角色：</strong>现实世界的 AI 应用 (FSD & 机器人)</p>
+                <p>特斯拉不仅仅是车企，它是一家 AI 机器人公司。他们利用 <strong>FSD (全自动驾驶)</strong> 技术让汽车像人一样看路和思考。同时，他们将这套 AI 系统移植到了 <strong>Optimus 人形机器人</strong> 身上。</p>
+                <br>
+                <p style="color: var(--primary-color);">简单来说：特斯拉致力于把 AI 从电脑屏幕带入物理世界，帮人类干活。</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 AI Horizon. 由你设计与开发。</p>
+    </footer>
+
+</body>
+</html>
