@@ -5,53 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenAI - The Brain</title>
     <style>
+        /* OpenAI 标志性的绿色主题 */
         :root { --openai-green: #10a37f; --dark-bg: #0a0a0a; --card-bg: #161616; --text-white: #ffffff; }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
         body { background-color: var(--dark-bg); color: var(--text-white); padding-bottom: 50px; }
+
+        /* 顶部导航 */
         nav { padding: 20px; background: #000; display: flex; align-items: center; border-bottom: 2px solid var(--openai-green); }
         .back-btn { color: #aaa; text-decoration: none; font-size: 1rem; margin-right: 20px; transition: 0.3s; }
         .back-btn:hover { color: #fff; }
         .logo { color: var(--openai-green); font-size: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Hero 标题 */
         .hero { background: linear-gradient(to bottom, #05261d, #0a0a0a); padding: 60px 20px; text-align: center; }
         .hero h1 { font-size: 3rem; margin-bottom: 15px; }
+        .hero p { color: #bbb; max-width: 600px; margin: 0 auto; font-size: 1.1rem; }
+        
+        /* 内容布局 */
         .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        
+        /* 标题样式 */
         h2 { color: var(--openai-green); border-left: 4px solid var(--openai-green); padding-left: 15px; margin: 40px 0 20px; font-size: 1.8rem; }
+
+        /* 介绍文字样式 */
+        .intro-text { font-size: 1.1rem; line-height: 1.8; color: #d1d5db; margin-bottom: 30px; }
+        .intro-text strong { color: var(--text-white); }
+
+        /* 新闻卡片 */
+        .loading { color: #888; text-align: center; padding: 20px; font-style: italic; }
         .news-item { background: var(--card-bg); padding: 25px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #333; transition: 0.3s; }
         .news-item:hover { border-color: var(--openai-green); transform: translateX(5px); }
-        .news-date { color: var(--openai-green); font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform: uppercase; }
-        .news-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
-        .news-item a { text-decoration: none; color: white; }
-        .news-item p { color: #aaa; line-height: 1.5; font-size: 0.95rem; }
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="index.html" class="back-btn">← Back to Hub</a>
-        <div class="logo">OpenAI</div>
-    </nav>
-    <div class="hero">
-        <h1>Creating AGI</h1>
-        <p>The company that started the revolution with ChatGPT and Sora.</p>
-    </div>
-    <div class="container">
-        <h2>Latest Updates (Auto)</h2>
-        <div id="news-container"><div style="color:#888;text-align:center;">Connecting to ChatGPT news feed...</div></div>
-    </div>
-    <script>
-        const rssUrl = 'https://news.google.com/rss/search?q=OpenAI+ChatGPT+Sora+GPT-5&hl=en-US&gl=US&ceid=US:en';
-        fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`)
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById('news-container');
-                container.innerHTML = ''; 
-                data.items.slice(0, 5).forEach(article => {
-                    const card = document.createElement('div');
-                    card.className = 'news-item';
-                    const date = new Date(article.pubDate).toLocaleDateString();
-                    card.innerHTML = `<span class="news-date">${date}</span><h3><a href="${article.link}" target="_blank">${article.title}</a></h3><p>Click title to read more...</p>`;
-                    container.appendChild(card);
-                });
-            });
-    </script>
-</body>
-</html>
+        .news-date { color: var(--openai-green); font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform:
