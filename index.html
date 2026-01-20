@@ -16,11 +16,9 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
         body { background-color: var(--dark-bg); color: var(--text-main); line-height: 1.6; padding-bottom: 50px; }
 
-        /* 帅气的导航栏 */
         nav { padding: 20px 5%; background: rgba(10, 10, 10, 0.9); border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--neon-green); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Hero 区域 */
         .hero { text-align: center; padding: 80px 20px; background: radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%); animation: fadeIn 1.5s ease-in-out; }
         .hero h1 { font-size: 3rem; margin-bottom: 20px; }
         .hero p { color: var(--text-sub); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
@@ -28,7 +26,6 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
 
-        /* 卡片样式 (带动画) */
         .card { background: var(--card-bg); padding: 30px; border-radius: 15px; border: 1px solid #333; transition: 0.3s; position: relative; overflow: hidden; text-decoration: none; color: inherit; display: block; }
         .card:hover { transform: translateY(-5px); border-color: var(--neon-green); box-shadow: 0 0 20px rgba(0, 255, 157, 0.15); cursor: pointer; }
         .card h3 { font-size: 1.8rem; margin-bottom: 10px; display: flex; align-items: center; }
@@ -42,7 +39,7 @@
 
     <nav>
         <div class="logo">AI HUB</div>
-        <div style="color: #666; font-size: 0.9rem;">v3.0 ULTIMATE</div>
+        <div style="color: #666; font-size: 0.9rem;">v3.1 +GOOGLE</div>
     </nav>
 
     <div class="hero">
@@ -71,11 +68,11 @@
                 <p>The creators of ChatGPT and Sora. Click here for the latest GPT-5 updates.</p>
             </a>
 
-            <div class="card">
-                <h3>GOOGLE</h3>
+            <a href="google.html" class="card">
+                <h3>GOOGLE 🔗</h3>
                 <span>Data & Research</span>
-                <p>With DeepMind and Gemini, Google is integrating AI into search and phones.</p>
-            </div>
+                <p>With DeepMind and Gemini, Google is integrating AI into search and phones. Click for news.</p>
+            </a>
 
             <div class="card">
                 <h3>MICROSOFT</h3>
