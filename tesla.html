@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TESLA - Real World AI</title>
+    <style>
+        /* 特斯拉红主题色 */
+        :root { --tesla-red: #e82127; --dark-bg: #0a0a0a; --card-bg: #161616; --text-white: #ffffff; }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { background-color: var(--dark-bg); color: var(--text-white); padding-bottom: 50px; }
+
+        nav { padding: 20px; background: #000; display: flex; align-items: center; border-bottom: 2px solid var(--tesla-red); }
+        .back-btn { color: #aaa; text-decoration: none; font-size: 1rem; margin-right: 20px; transition: 0.3s; }
+        .back-btn:hover { color: #fff; }
+        .logo { color: var(--tesla-red); font-size: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
+
+        .hero { background: linear-gradient(to bottom, #2a0a0a, #0a0a0a); padding: 60px 20px; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        h2 { color: var(--tesla-red); border-left: 4px solid var(--tesla-red); padding-left: 15px; margin: 40px 0 20px; font-size: 1.8rem; }
+
+        .loading { color: #888; text-align: center; padding: 20px; font-style: italic; }
+
+        /* 新闻卡片样式 */
+        .news-item { background: var(--card-bg); padding: 25px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #333; transition: 0.3s; }
+        .news-item:hover { border-color: var(--tesla-red); transform: translateX(5px); }
+        .news-date { color: var(--tesla-red); font-size: 0.8rem; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        .news-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .news-item a { text-decoration: none; color: white; }
+        .news-item p { color: #aaa; line-height: 1.5; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="back-btn">← Back to Hub</a>
+        <div class="logo">TESLA AI</div>
+    </nav>
+
+    <div class="hero">
+        <h1>Real World AI</h1>
+        <p>From self-driving cars to humanoid robots. Tesla is bringing intelligence to the physical world.</p>
+    </div>
+
+    <div class="container">
+        <h2>What They Do</h2>
+        <p style="color: #ccc; line-height: 1.8; font-size: 1.1rem;">
+            Tesla is not just a car company; it is a robotics company. 
+            <br><br>
+            They are building <strong>FSD (Full Self-Driving)</strong>, which uses cameras and neural networks to drive cars automatically. They are also using this same technology to build <strong>Optimus</strong>, a general-purpose humanoid robot designed to replace human labor.
+        </p>
+
+        <h2>Latest Updates (Auto)</h2>
+        <div id="news-container">
+            <div class="loading">Fetching latest Tesla AI news...</div>
+        </div>
+
+    </div>
+
+    <script>
+        // 这里的关键词改成了：Tesla AI Optimus FSD
+        const rssUrl = 'https://news.google.com/rss/search?q=Tesla+AI+Optimus+Robot+FSD&hl=en-US&gl=US&ceid=US:en';
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('news-container');
+                container.innerHTML = ''; 
+
+                const articles = data.items.slice(0, 5);
+
+                articles.forEach(article => {
+                    const card = document.createElement('div');
+                    card.className = 'news-item';
+                    const date = new Date(article.pubDate).toLocaleDateString();
+
+                    card.innerHTML = `
+                        <span class="news-date">${date}</span>
+                        <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
+                        <p>Click title to read more...</p>
+                    `;
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => {
+                console.log(error);
+                document.getElementById('news-container').innerHTML = '<p style="color:red">Error loading news.</p>';
+            });
+    </script>
+
+</body>
+</html>
