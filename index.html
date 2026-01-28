@@ -3,91 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tech Hub - Global Intelligence</title>
+    <title>AI News Hub - Realtime Updates</title>
     <style>
         :root {
-            --neon-green: #00ff9d;
-            --neon-blue: #00b8ff;
-            --dark-bg: #0a0a0a;
-            --card-bg: #161616;
-            --text-main: #ffffff;
-            --text-sub: #a0a0a0;
+            --bg: #050505;
+            --card-bg: #111;
+            --accent: #10b981; /* 视频里的绿色 */
+            --text: #ffffff;
+            --subtext: #9ca3af;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
-        body { background-color: var(--dark-bg); color: var(--text-main); line-height: 1.6; padding-bottom: 50px; }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+            max-width: 600px; /* 手机端显示优化 */
+            margin: 0 auto;
+        }
 
-        nav { padding: 20px 5%; background: rgba(10, 10, 10, 0.9); border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--neon-green); text-transform: uppercase; letter-spacing: 2px; }
+        header {
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
 
-        .hero { text-align: center; padding: 80px 20px; background: radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%); animation: fadeIn 1.5s ease-in-out; }
-        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
-        .hero p { color: var(--text-sub); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+        h1 {
+            font-size: 2rem;
+            margin: 0;
+            letter-spacing: -1px;
+        }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .highlight {
+            color: var(--accent);
+        }
 
-        .card { background: var(--card-bg); padding: 30px; border-radius: 15px; border: 1px solid #333; transition: 0.3s; text-decoration: none; color: inherit; display: block; }
-        .card:hover { transform: translateY(-5px); border-color: var(--neon-green); box-shadow: 0 0 20px rgba(0, 255, 157, 0.15); cursor: pointer; }
-        .card h3 { font-size: 1.8rem; margin-bottom: 10px; }
-        .card span { font-size: 0.9rem; color: var(--neon-blue); text-transform: uppercase; margin-bottom: 15px; display: block; }
-        .card p { color: var(--text-sub); }
+        .subtitle {
+            color: var(--subtext);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
 
-        .follow-section { background: #111; border: 1px dashed var(--neon-green); padding: 40px; border-radius: 20px; text-align: center; margin-top: 60px; }
-        .follow-input { padding: 12px 20px; width: 100%; max-width: 300px; border-radius: 25px; border: none; background: #222; color: white; margin-bottom: 15px; outline: none; }
-        .follow-btn { padding: 12px 30px; border-radius: 25px; border: none; background: var(--neon-green); color: black; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .follow-btn:hover { background: #fff; transform: scale(1.05); }
+        /* 卡片列表 */
+        .card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-        .floating-follow { position: fixed; bottom: 30px; right: 30px; background: var(--neon-green); color: black; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 0 20px rgba(0, 255, 157, 0.5); z-index: 1000; animation: pulse 2s infinite; }
+        /* 单个卡片样式 */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 20px;
+            text-decoration: none; /* 去掉下划线 */
+            color: white;
+            transition: 0.3s;
+            display: block;
+            position: relative;
+        }
 
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .category {
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        .description {
+            color: var(--subtext);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .icon {
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        /* 底部 */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
 
-    <nav><div class="logo">AI HUB</div></nav>
+    <header>
+        <h1>AI <span class="highlight">HUB</span></h1>
+        <p class="subtitle">The world's first student-led hub for real-time AI news.</p>
+    </header>
 
-    <div class="hero">
-        <h1>Welcome to the <span style="color: var(--neon-green);">AI Future</span></h1>
-        <p>The world's first student-led hub for real-time AI news.</p>
+    <div class="card-list">
+
+        <a href="https://nvidianews.nvidia.com/" target="_blank" class="card">
+            <div class="card-header">
+                <h2>NVIDIA</h2>
+                <span class="icon">🔗</span>
+            </div>
+            <span class="category">Hardware</span>
+            <p class="description">Live B200 and GPU updates.</p>
+        </a>
+
+        <a href="https://www.tesla.com/AI" target="_blank" class="card">
+            <div class="card-header">
+                <h2>TESLA</h2>
+                <span class="icon">🔗</span>
+            </div>
+            <span class="category">Robotics</span>
+            <p class="description">Optimus and FSD progress.</p>
+        </a>
+
+        <a href="https://openai.com/news" target="_blank" class="card">
+            <div class="card-header">
+                <h2>OPENAI</h2>
+                <span class="icon">🔗</span>
+            </div>
+            <span class="category">Gen AI</span>
+            <p class="description">ChatGPT and Sora news.</p>
+        </a>
+
+        <a href="https://blog.google/technology/ai/" target="_blank" class="card">
+            <div class="card-header">
+                <h2>GOOGLE</h2>
+                <span class="icon">🔗</span>
+            </div>
+            <span class="category">Research</span>
+            <p class="description">Gemini and DeepMind breakthroughs.</p>
+        </a>
+
     </div>
 
-    <div class="container">
-        <div class="grid">
-            <a href="nvidia.html" class="card"><h3>NVIDIA 🔗</h3><span>Hardware</span><p>Live B200 and GPU updates.</p></a>
-            <a href="tesla.html" class="card"><h3>TESLA 🔗</h3><span>Robotics</span><p>Optimus and FSD progress.</p></a>
-            <a href="openai.html" class="card"><h3>OPENAI 🔗</h3><span>Gen AI</span><p>ChatGPT and Sora news.</p></a>
-            <a href="google.html" class="card"><h3>GOOGLE 🔗</h3><span>Research</span><p>Gemini and DeepMind discovery.</p></a>
-            <a href="microsoft.html" class="card"><h3>MICROSOFT 🔗</h3><span>Software</span><p>Copilot and Windows AI.</p></a>
-            <a href="meta.html" class="card"><h3>META 🔗</h3><span>Open Source</span><p>Llama and AI wearables.</p></a>
-        </div>
-
-        <div class="follow-section" id="subscribe">
-            <h2>Follow the Revolution</h2>
-            <p style="color: #888; margin-bottom: 20px;">Get a notification whenever the AI world changes.</p>
-            <input type="email" id="userEmail" class="follow-input" placeholder="Enter your email...">
-            <br>
-            <button class="follow-btn" onclick="subscribe()">FOLLOW NOW</button>
-        </div>
-    </div>
-
-    <a href="#subscribe" class="floating-follow">Follow for Updates ⚡</a>
-
-    <script>
-        function subscribe() {
-            const email = document.getElementById('userEmail').value;
-            if (email.includes('@')) {
-                // 已自动填入你的 Google Form 链接
-                window.open('https://docs.google.com/forms/d/e/1FAIpQLSesnnAaRaIBZiK9WF3A8Iv5Tihzngo-rgncFDrGa3B8Uz_lyg/viewform?usp=pp_url&entry.1054366524=' + email);
-                alert("感谢关注！请在弹出的页面点击提交以完成订阅。");
-            } else {
-                alert("请输入正确的邮箱地址！");
-            }
-        }
-    </script>
-
-    <footer style="text-align: center; padding: 40px; color: #555;">
-        <p>Created by Chin Wai Feng | AI Horizon Project 2026</p>
+    <footer>
+        Built by a Student Developer | 2026
     </footer>
+
 </body>
 </html>
