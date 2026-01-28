@@ -3,165 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI News Hub - Realtime Updates</title>
+    <title>AI HUB - Student News</title>
     <style>
-        :root {
-            --bg: #050505;
-            --card-bg: #111;
-            --accent: #10b981; /* 视频里的绿色 */
-            --text: #ffffff;
-            --subtext: #9ca3af;
-        }
-        
         body {
-            margin: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: sans-serif;
             padding: 20px;
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Segoe UI', sans-serif;
-            max-width: 600px; /* 手机端显示优化 */
+            max-width: 500px;
             margin: 0 auto;
         }
 
+        /* 头部样式：还原视频里的绿色 HUB */
         header {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             padding-top: 20px;
         }
-
         h1 {
             font-size: 2rem;
             margin: 0;
-            letter-spacing: -1px;
+            letter-spacing: 1px;
         }
-
-        .highlight {
-            color: var(--accent);
-        }
-
+        .green-text { color: #4ade80; } /* 那个亮绿色 */
         .subtitle {
-            color: var(--subtext);
+            color: #888;
             font-size: 0.9rem;
             margin-top: 10px;
         }
 
-        /* 卡片列表 */
+        /* 卡片容器 */
         .card-list {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
-        /* 单个卡片样式 */
+        /* 卡片样式：还原那个黑色圆角框 */
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid #222;
-            border-radius: 16px;
+            background-color: #111;
+            border: 1px solid #333;
+            border-radius: 15px;
             padding: 20px;
-            text-decoration: none; /* 去掉下划线 */
+            text-decoration: none; /* 去掉链接下划线 */
             color: white;
-            transition: 0.3s;
-            display: block;
             position: relative;
+            display: block;
+            transition: 0.2s;
         }
 
+        /* 鼠标移上去会有绿色边框，像视频里选中的样子 */
         .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
+            border-color: #4ade80;
         }
 
-        .card-header {
+        .card-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .card h2 {
             margin: 0;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .category {
-            font-size: 0.7rem;
-            font-weight: bold;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 5px;
+        /* 链接图标 🔗 */
+        .link-icon { font-size: 1rem; opacity: 0.7; }
+
+        /* 那个圆形的开关按钮模拟 */
+        .toggle-circle {
+            width: 15px;
+            height: 15px;
+            background-color: #444;
+            border-radius: 50%;
             display: inline-block;
         }
+        .card:hover .toggle-circle {
+            background-color: #4ade80; /* 悬停时开关变绿 */
+            box-shadow: 0 0 10px #4ade80;
+        }
 
-        .description {
-            color: var(--subtext);
-            font-size: 0.85rem;
+        /* 标签文字 (HARDWARE, ROBOTICS...) */
+        .tag {
+            color: #3b82f6; /* 蓝色字 */
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        /* OpenAI 的标签是绿色的 */
+        .tag.green { color: #4ade80; }
+
+        .desc {
+            color: #999;
+            font-size: 0.9rem;
             margin: 0;
-        }
-
-        .icon {
-            font-size: 1.2rem;
-            opacity: 0.7;
-        }
-
-        /* 底部 */
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            color: #333;
-            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>AI <span class="highlight">HUB</span></h1>
+        <h1>AI <span class="green-text">HUB</span></h1>
         <p class="subtitle">The world's first student-led hub for real-time AI news.</p>
     </header>
 
     <div class="card-list">
 
         <a href="https://nvidianews.nvidia.com/" target="_blank" class="card">
-            <div class="card-header">
-                <h2>NVIDIA</h2>
-                <span class="icon">🔗</span>
+            <div class="card-top">
+                <h2>NVIDIA <span class="link-icon">🔗</span></h2>
+                <span class="toggle-circle"></span>
             </div>
-            <span class="category">Hardware</span>
-            <p class="description">Live B200 and GPU updates.</p>
+            <span class="tag">HARDWARE</span>
+            <p class="desc">Live B200 and GPU updates.</p>
         </a>
 
         <a href="https://www.tesla.com/AI" target="_blank" class="card">
-            <div class="card-header">
-                <h2>TESLA</h2>
-                <span class="icon">🔗</span>
+            <div class="card-top">
+                <h2>TESLA <span class="link-icon">🔗</span></h2>
+                <span class="toggle-circle"></span>
             </div>
-            <span class="category">Robotics</span>
-            <p class="description">Optimus and FSD progress.</p>
+            <span class="tag">ROBOTICS</span>
+            <p class="desc">Optimus and FSD progress.</p>
         </a>
 
-        <a href="https://openai.com/news" target="_blank" class="card">
-            <div class="card-header">
-                <h2>OPENAI</h2>
-                <span class="icon">🔗</span>
+        <a href="https://openai.com/news" target="_blank" class="card" style="border-color: #4ade80;"> <div class="card-top">
+                <h2>OPENAI <span class="link-icon">🔗</span></h2>
+                <span class="toggle-circle" style="background-color: #4ade80;"></span>
             </div>
-            <span class="category">Gen AI</span>
-            <p class="description">ChatGPT and Sora news.</p>
+            <span class="tag green">GEN AI</span>
+            <p class="desc">ChatGPT and Sora news.</p>
         </a>
 
         <a href="https://blog.google/technology/ai/" target="_blank" class="card">
-            <div class="card-header">
-                <h2>GOOGLE</h2>
-                <span class="icon">🔗</span>
+            <div class="card-top">
+                <h2>GOOGLE <span class="link-icon">🔗</span></h2>
+                <span class="toggle-circle"></span>
             </div>
-            <span class="category">Research</span>
-            <p class="description">Gemini and DeepMind breakthroughs.</p>
+            <span class="tag">RESEARCH</span>
+            <p class="desc">Gemini and DeepMind breakthroughs.</p>
         </a>
 
     </div>
-
-    <footer>
-        Built by a Student Developer | 2026
-    </footer>
 
 </body>
 </html>
