@@ -3,64 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI HUB - Student News</title>
+    <title>AI HUB - Subscription Edition</title>
     <style>
+        /* 1. 完美还原视频的黑色风格 */
         body {
             background-color: #000;
             color: #fff;
-            font-family: sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             padding: 20px;
             max-width: 500px;
             margin: 0 auto;
         }
 
-        /* 头部样式：还原视频里的绿色 HUB */
-        header {
-            margin-bottom: 30px;
-            padding-top: 20px;
-        }
-        h1 {
-            font-size: 2rem;
-            margin: 0;
-            letter-spacing: 1px;
-        }
-        .green-text { color: #4ade80; } /* 那个亮绿色 */
-        .subtitle {
-            color: #888;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
+        /* 头部样式 */
+        header { margin-bottom: 30px; padding-top: 20px; }
+        h1 { font-size: 2rem; margin: 0; letter-spacing: 1px; font-weight: 800; }
+        .green-text { color: #4ade80; } /* 标志性的绿色 */
+        .subtitle { color: #888; font-size: 0.9rem; margin-top: 10px; }
 
-        /* 卡片容器 */
-        .card-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        /* 卡片列表 */
+        .card-list { display: flex; flex-direction: column; gap: 15px; }
 
-        /* 卡片样式：还原那个黑色圆角框 */
+        /* 卡片样式：黑色圆角框 */
         .card {
             background-color: #111;
             border: 1px solid #333;
-            border-radius: 15px;
+            border-radius: 16px;
             padding: 20px;
-            text-decoration: none; /* 去掉链接下划线 */
+            text-decoration: none;
             color: white;
             position: relative;
             display: block;
             transition: 0.2s;
         }
 
-        /* 鼠标移上去会有绿色边框，像视频里选中的样子 */
-        .card:hover {
-            border-color: #4ade80;
-        }
+        .card:active { transform: scale(0.98); } /* 点击时的按压感 */
 
         .card-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .card h2 {
@@ -69,42 +52,39 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 700;
         }
 
-        /* 链接图标 🔗 */
-        .link-icon { font-size: 1rem; opacity: 0.7; }
+        .link-icon { font-size: 1rem; opacity: 0.6; }
 
-        /* 那个圆形的开关按钮模拟 */
-        .toggle-circle {
-            width: 15px;
-            height: 15px;
-            background-color: #444;
+        /* === 2. 订阅开关 (Subscription Toggle) === */
+        /* 这是你要的那个小圆圈功能！ */
+        .toggle-btn {
+            width: 24px;
+            height: 24px;
+            background-color: #333; /* 没订阅是灰色 */
             border-radius: 50%;
-            display: inline-block;
-        }
-        .card:hover .toggle-circle {
-            background-color: #4ade80; /* 悬停时开关变绿 */
-            box-shadow: 0 0 10px #4ade80;
+            border: 2px solid #555;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            z-index: 10; /* 保证它浮在最上面，可以单独点 */
         }
 
-        /* 标签文字 (HARDWARE, ROBOTICS...) */
-        .tag {
-            color: #3b82f6; /* 蓝色字 */
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            display: block;
+        /* 订阅后的状态（绿色） */
+        .toggle-btn.subscribed {
+            background-color: #4ade80;
+            border-color: #4ade80;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.6);
         }
-        
-        /* OpenAI 的标签是绿色的 */
-        .tag.green { color: #4ade80; }
 
-        .desc {
-            color: #999;
-            font-size: 0.9rem;
-            margin: 0;
-        }
+        /* 标签颜色 */
+        .tag { font-size: 0.75rem; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; display: block; }
+        .tag.blue { color: #3b82f6; }
+        .tag.green { color: #4ade80; } /* OpenAI 的绿色标签 */
+        .tag.purple { color: #c084fc; }
+
+        .desc { color: #999; font-size: 0.9rem; margin: 0; }
     </style>
 </head>
 <body>
@@ -116,42 +96,58 @@
 
     <div class="card-list">
 
-        <a href="https://nvidianews.nvidia.com/" target="_blank" class="card">
+        <div class="card" onclick="openLink('https://nvidianews.nvidia.com/')">
             <div class="card-top">
                 <h2>NVIDIA <span class="link-icon">🔗</span></h2>
-                <span class="toggle-circle"></span>
+                <div class="toggle-btn" onclick="toggleSub(this, event)"></div>
             </div>
-            <span class="tag">HARDWARE</span>
+            <span class="tag blue">HARDWARE</span>
             <p class="desc">Live B200 and GPU updates.</p>
-        </a>
+        </div>
 
-        <a href="https://www.tesla.com/AI" target="_blank" class="card">
+        <div class="card" onclick="openLink('https://www.tesla.com/AI')">
             <div class="card-top">
                 <h2>TESLA <span class="link-icon">🔗</span></h2>
-                <span class="toggle-circle"></span>
+                <div class="toggle-btn" onclick="toggleSub(this, event)"></div>
             </div>
-            <span class="tag">ROBOTICS</span>
+            <span class="tag blue">ROBOTICS</span>
             <p class="desc">Optimus and FSD progress.</p>
-        </a>
+        </div>
 
-        <a href="https://openai.com/news" target="_blank" class="card" style="border-color: #4ade80;"> <div class="card-top">
+        <div class="card" onclick="openLink('https://openai.com/news')" style="border-color: #4ade80;"> <div class="card-top">
                 <h2>OPENAI <span class="link-icon">🔗</span></h2>
-                <span class="toggle-circle" style="background-color: #4ade80;"></span>
+                <div class="toggle-btn subscribed" onclick="toggleSub(this, event)"></div>
             </div>
             <span class="tag green">GEN AI</span>
             <p class="desc">ChatGPT and Sora news.</p>
-        </a>
+        </div>
 
-        <a href="https://blog.google/technology/ai/" target="_blank" class="card">
+        <div class="card" onclick="openLink('https://blog.google/technology/ai/')">
             <div class="card-top">
                 <h2>GOOGLE <span class="link-icon">🔗</span></h2>
-                <span class="toggle-circle"></span>
+                <div class="toggle-btn" onclick="toggleSub(this, event)"></div>
             </div>
-            <span class="tag">RESEARCH</span>
+            <span class="tag purple">RESEARCH</span>
             <p class="desc">Gemini and DeepMind breakthroughs.</p>
-        </a>
+        </div>
 
     </div>
+
+    <script>
+        // 1. 处理订阅点击 (只变色，不跳转)
+        function toggleSub(btn, event) {
+            event.stopPropagation(); // 阻止点击事件传给卡片，防止误触跳转
+            btn.classList.toggle('subscribed'); // 切换绿色状态
+            
+            // 震动反馈 (如果手机支持)
+            if (navigator.vibrate) navigator.vibrate(50);
+        }
+
+        // 2. 处理卡片跳转
+        function openLink(url) {
+            window.open(url, '_blank'); // 在新窗口打开链接
+        }
+    </script>
 
 </body>
 </html>
